@@ -11,12 +11,24 @@ importers:
       '@nextui-org/button':
         specifier: ^2.0.37
         version: 2.0.37(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@nextui-org/chip':
+        specifier: ^2.0.32
+        version: 2.0.32(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nextui-org/navbar':
         specifier: ^2.0.36
         version: 2.0.36(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(@types/react@18.3.5)(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nextui-org/react':
         specifier: ^2.4.6
         version: 2.4.6(@types/react@18.3.5)(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10)
+      '@nextui-org/select':
+        specifier: ^2.2.5
+        version: 2.2.5(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(@types/react@18.3.5)(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@nextui-org/slider':
+        specifier: ^2.2.15
+        version: 2.2.15(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@nextui-org/tooltip':
+        specifier: ^2.0.39
+        version: 2.0.39(@nextui-org/system@2.2.5(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@nextui-org/theme@2.2.9(tailwindcss@3.4.10))(framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-motion:
         specifier: ^11.5.4
         version: 11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4039,7 +4051,7 @@ snapshots:
 
   '@react-aria/combobox@3.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@react-aria/i18n': 3.11.1(react@18.3.1)
+      '@react-aria/i18n': 3.12.2(react@18.3.1)
       '@react-aria/listbox': 3.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/live-announcer': 3.3.4
       '@react-aria/menu': 3.15.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4226,7 +4238,7 @@ snapshots:
       '@react-aria/selection': 3.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.25.2(react@18.3.1)
       '@react-stately/collections': 3.10.9(react@18.3.1)
-      '@react-stately/list': 3.10.5(react@18.3.1)
+      '@react-stately/list': 3.10.8(react@18.3.1)
       '@react-types/listbox': 3.5.1(react@18.3.1)
       '@react-types/shared': 3.24.1(react@18.3.1)
       '@swc/helpers': 0.5.13
@@ -4260,10 +4272,10 @@ snapshots:
       '@react-aria/selection': 3.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.25.2(react@18.3.1)
       '@react-stately/collections': 3.10.9(react@18.3.1)
-      '@react-stately/menu': 3.7.1(react@18.3.1)
-      '@react-stately/tree': 3.8.1(react@18.3.1)
+      '@react-stately/menu': 3.8.2(react@18.3.1)
+      '@react-stately/tree': 3.8.4(react@18.3.1)
       '@react-types/button': 3.9.6(react@18.3.1)
-      '@react-types/menu': 3.9.9(react@18.3.1)
+      '@react-types/menu': 3.9.11(react@18.3.1)
       '@react-types/shared': 3.24.1(react@18.3.1)
       '@swc/helpers': 0.5.13
       react: 18.3.1
@@ -4626,7 +4638,7 @@ snapshots:
   '@react-stately/menu@3.7.1(react@18.3.1)':
     dependencies:
       '@react-stately/overlays': 3.6.10(react@18.3.1)
-      '@react-types/menu': 3.9.9(react@18.3.1)
+      '@react-types/menu': 3.9.11(react@18.3.1)
       '@react-types/shared': 3.24.1(react@18.3.1)
       '@swc/helpers': 0.5.13
       react: 18.3.1
