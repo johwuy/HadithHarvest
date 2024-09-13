@@ -1,22 +1,30 @@
 import { Chip } from "@nextui-org/chip";
+import { Button, Tooltip } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Slider, SliderValue } from "@nextui-org/slider";
 import { useState } from "react";
 import hadithInfo from "../../lib/hadithInfo";
-import { Button, Tooltip } from "@nextui-org/react";
-import { HadithKey } from "../../lib/hadithType";
+import type { HadithKey } from "../../lib/hadithType";
+
+const INITIAL_SOURCES: HadithKey[] = [
+    "bukhari",
+    "muslim",
+    "abudawud",
+    "tirmidhi",
+    "nasai",
+    "ibnmajah",
+];
+
+const STARTING_COUNT = 1;
 
 function HadithSourceForm() {
-    const [hadithSources, setHadithSources] = useState<Array<HadithKey>>([
-        "bukhari",
-        "muslim",
-        "abudawud",
-        "tirmidhi",
-        "nasai",
-        "ibnmajah",
-    ]);
-    const [value, setValue] = useState<SliderValue>(1);
-    const [inputValue, setInputValue] = useState<string>("1");
+    const [hadithSources, setHadithSources] =
+        useState<Array<HadithKey>>(INITIAL_SOURCES);
+    const [value, setValue] = useState<SliderValue>(STARTING_COUNT);
+    const [inputValue, setInputValue] = useState<string>(
+        STARTING_COUNT.toString(),
+    );
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (value: SliderValue) => {
         if (isNaN(Number(value))) return;
@@ -32,13 +40,15 @@ function HadithSourceForm() {
     };
 
     return (
-        <form className="w-full max-w-5xl space-y-8 px-6 py-4">
+        <form className="flex w-full max-w-5xl flex-col space-y-8 px-6 py-4">
             <Select
+                isDisabled={isLoading}
                 items={hadithInfo}
                 label="Hadith Source"
                 selectionMode="multiple"
                 size="lg"
                 isMultiline={true}
+                classNames={{ label: "text-large" }}
                 renderValue={(selectedHadiths) => {
                     return (
                         <div className="flex flex-wrap gap-2">
@@ -68,16 +78,15 @@ function HadithSourceForm() {
                 }}
                 selectedKeys={hadithSources}
                 onChange={(e) => {
-                    const newHadtithSouces = e.target.value.split(
-                        ",",
-                    ) as HadithKey[];
-                    console.log(hadithSources, newHadtithSouces);
-                    if (
-                        hadithSources.length != 1 ||
-                        newHadtithSouces.length != 1
-                    ) {
-                        setHadithSources(newHadtithSouces);
+                    const newHadtithSouces =
+                        e.target.value === ""
+                            ? (e.target.value.split(",") as HadithKey[])
+                            : [];
+                    if (newHadtithSouces.length === 0) {
+                        return;
                     }
+
+                    setHadithSources(newHadtithSouces);
                 }}
             >
                 {hadithInfo.map((hadith) => (
@@ -85,12 +94,13 @@ function HadithSourceForm() {
                 ))}
             </Select>
             <Slider
-                label="Temperature"
+                isDisabled={isLoading}
+                label="Count"
+                showOutline
                 minValue={1}
+                radius="lg"
                 color="secondary"
-                classNames={{
-                    label: "text-medium",
-                }}
+                classNames={{ label: "text-medium" }}
                 renderValue={({ ...props }) => (
                     <output {...props}>
                         <Tooltip
@@ -128,9 +138,14 @@ function HadithSourceForm() {
                 onChange={handleChange}
             />
             <Button
-                className="w-full"
+                className=""
                 color="primary"
-                onClick={() => console.log(hadithSources, value)}
+                onClick={() => {
+                    console.log(hadithSources, value);
+                    setIsLoading(true);
+                    setTimeout(() => setIsLoading(false), 5000);
+                }}
+                isLoading={isLoading}
             >
                 Generate
             </Button>
