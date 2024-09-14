@@ -1,98 +1,33 @@
-import { Chip } from "@nextui-org/chip";
-import { Button, Tooltip } from "@nextui-org/react";
-import { Select, SelectItem } from "@nextui-org/select";
-import { Slider, SliderValue } from "@nextui-org/slider";
+import { Button, Slider, SliderValue, Tooltip } from "@nextui-org/react";
+import HadithSourceSelection from "./HadithSourceSelection";
+import {
+    STARTING_COUNT,
+    useFormStateStore,
+} from "../../stores/formStateStore/formStateStore";
 import { useState } from "react";
-import hadithInfo from "../../lib/hadithInfo";
-import type { HadithKey } from "../../lib/hadithType";
-
-const INITIAL_SOURCES: HadithKey[] = [
-    "bukhari",
-    "muslim",
-    "abudawud",
-    "tirmidhi",
-    "nasai",
-    "ibnmajah",
-];
-
-const STARTING_COUNT = 1;
 
 function HadithSourceForm() {
-    const [hadithSources, setHadithSources] =
-        useState<Array<HadithKey>>(INITIAL_SOURCES);
+    const { isLoading, toggleLoading, hadithCount, hadithSources } =
+        useFormStateStore();
+
     const [value, setValue] = useState<SliderValue>(STARTING_COUNT);
     const [inputValue, setInputValue] = useState<string>(
         STARTING_COUNT.toString(),
     );
-    const [isLoading, setIsLoading] = useState(false);
 
-    const handleChange = (value: SliderValue) => {
-        if (isNaN(Number(value))) return;
+    function handleChange(newValue: number | number[]) {
+        if (isNaN(Number(newValue))) return;
 
-        if (Array.isArray(value)) {
-            value = value.map((v) => (v >= 1 ? Math.round(v) : 1));
-        } else {
-            value = value >= 1 ? Math.round(value) : 1;
+        if (typeof newValue === "number") {
+            newValue = newValue >= 1 ? Math.round(newValue) : 1;
+            setValue(newValue);
+            setInputValue(value.toString());
         }
-
-        setValue(value);
-        setInputValue(value.toString());
-    };
+    }
 
     return (
         <form className="flex w-full max-w-5xl flex-col space-y-8 px-6 py-4">
-            <Select
-                isDisabled={isLoading}
-                items={hadithInfo}
-                label="Hadith Source"
-                selectionMode="multiple"
-                size="lg"
-                isMultiline={true}
-                classNames={{ label: "text-large" }}
-                renderValue={(selectedHadiths) => {
-                    return (
-                        <div className="flex flex-wrap gap-2">
-                            {selectedHadiths.map((selectedHadith) => (
-                                <Chip
-                                    key={selectedHadith.key}
-                                    onClose={() => {
-                                        setHadithSources(
-                                            (prevHadithSources) => {
-                                                return prevHadithSources.length >
-                                                    1
-                                                    ? prevHadithSources.filter(
-                                                          (prevHadithSource) =>
-                                                              prevHadithSource !==
-                                                              selectedHadith.key,
-                                                      )
-                                                    : prevHadithSources;
-                                            },
-                                        );
-                                    }}
-                                >
-                                    {selectedHadith.textValue}
-                                </Chip>
-                            ))}
-                        </div>
-                    );
-                }}
-                selectedKeys={hadithSources}
-                onChange={(e) => {
-                    const newHadtithSouces =
-                        e.target.value === ""
-                            ? (e.target.value.split(",") as HadithKey[])
-                            : [];
-                    if (newHadtithSouces.length === 0) {
-                        return;
-                    }
-
-                    setHadithSources(newHadtithSouces);
-                }}
-            >
-                {hadithInfo.map((hadith) => (
-                    <SelectItem key={hadith.key}>{hadith.label}</SelectItem>
-                ))}
-            </Select>
+            <HadithSourceSelection />
             <Slider
                 isDisabled={isLoading}
                 label="Count"
@@ -101,6 +36,8 @@ function HadithSourceForm() {
                 radius="lg"
                 color="secondary"
                 classNames={{ label: "text-medium" }}
+                value={value}
+                onChange={handleChange}
                 renderValue={({ ...props }) => (
                     <output {...props}>
                         <Tooltip
@@ -134,16 +71,14 @@ function HadithSourceForm() {
                         </Tooltip>
                     </output>
                 )}
-                value={value}
-                onChange={handleChange}
             />
             <Button
                 className=""
                 color="primary"
                 onClick={() => {
-                    console.log(hadithSources, value);
-                    setIsLoading(true);
-                    setTimeout(() => setIsLoading(false), 5000);
+                    toggleLoading();
+                    setTimeout(() => toggleLoading(), 3000);
+                    console.log(hadithSources, hadithCount);
                 }}
                 isLoading={isLoading}
             >
