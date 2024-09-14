@@ -5,6 +5,7 @@ import {
     useFormStateStore,
 } from "../../stores/formStateStore/formStateStore";
 import { useState } from "react";
+import { processNewValue } from "../../lib/utils";
 
 // TODO: Factor out processing new value into its own function
 
@@ -17,29 +18,23 @@ function HadithSourceForm() {
         setHadithCount,
     } = useFormStateStore();
 
-    const [tempValue, setTempValue] = useState<SliderValue>(STARTING_COUNT);
+    const [tempValue, setTempValue] = useState<number>(STARTING_COUNT);
     const [inputValue, setInputValue] = useState<string>(
         STARTING_COUNT.toString(),
     );
 
-    function handleChange(newValue: number | number[]) {
-        if (isNaN(Number(newValue))) return;
-
-        if (typeof newValue === "number") {
-            newValue = newValue >= 1 ? Math.round(newValue) : 1;
-            setTempValue(newValue);
-            setInputValue(newValue.toString());
-        }
+    function updateLocalCountState(newValue: number | number[]): number | null {
+        const processedValue = processNewValue(newValue);
+        if (processedValue == null) return null;
+        setTempValue(processedValue);
+        setInputValue(processedValue.toString());
+        return processedValue;
     }
 
-    function handleChangeEnd(newValue: number | number[]) {
-        if (isNaN(Number(newValue))) return;
-
-        if (typeof newValue === "number") {
-            newValue = newValue >= 1 ? Math.round(newValue) : 1;
-            setTempValue(newValue);
-            setHadithCount(newValue);
-            setInputValue(newValue.toString());
+    function handleUpdateAllCountStates(newValue: SliderValue) {
+        const processedValue = updateLocalCountState(newValue);
+        if (processedValue != null) {
+            setHadithCount(processedValue);
         }
     }
 
@@ -55,8 +50,8 @@ function HadithSourceForm() {
                 color="secondary"
                 classNames={{ label: "text-medium" }}
                 value={tempValue}
-                onChange={handleChange}
-                onChangeEnd={handleChangeEnd}
+                onChange={updateLocalCountState}
+                onChangeEnd={handleUpdateAllCountStates}
                 renderValue={({ ...props }) => (
                     <output {...props}>
                         <Tooltip
@@ -83,7 +78,9 @@ function HadithSourceForm() {
                                         e.key === "Enter" &&
                                         !isNaN(Number(inputValue))
                                     ) {
-                                        handleChangeEnd(Number(inputValue));
+                                        handleUpdateAllCountStates(
+                                            Number(inputValue),
+                                        );
                                     }
                                 }}
                             />
