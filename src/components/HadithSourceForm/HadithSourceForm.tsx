@@ -6,11 +6,18 @@ import {
 } from "../../stores/formStateStore/formStateStore";
 import { useState } from "react";
 
-function HadithSourceForm() {
-    const { isLoading, toggleLoading, hadithCount, hadithSources } =
-        useFormStateStore();
+// TODO: Factor out processing new value into its own function
 
-    const [value, setValue] = useState<SliderValue>(STARTING_COUNT);
+function HadithSourceForm() {
+    const {
+        isLoading,
+        toggleLoading,
+        hadithCount,
+        hadithSources,
+        setHadithCount,
+    } = useFormStateStore();
+
+    const [tempValue, setTempValue] = useState<SliderValue>(STARTING_COUNT);
     const [inputValue, setInputValue] = useState<string>(
         STARTING_COUNT.toString(),
     );
@@ -20,8 +27,19 @@ function HadithSourceForm() {
 
         if (typeof newValue === "number") {
             newValue = newValue >= 1 ? Math.round(newValue) : 1;
-            setValue(newValue);
-            setInputValue(value.toString());
+            setTempValue(newValue);
+            setInputValue(newValue.toString());
+        }
+    }
+
+    function handleChangeEnd(newValue: number | number[]) {
+        if (isNaN(Number(newValue))) return;
+
+        if (typeof newValue === "number") {
+            newValue = newValue >= 1 ? Math.round(newValue) : 1;
+            setTempValue(newValue);
+            setHadithCount(newValue);
+            setInputValue(newValue.toString());
         }
     }
 
@@ -36,8 +54,9 @@ function HadithSourceForm() {
                 radius="lg"
                 color="secondary"
                 classNames={{ label: "text-medium" }}
-                value={value}
+                value={tempValue}
                 onChange={handleChange}
+                onChangeEnd={handleChangeEnd}
                 renderValue={({ ...props }) => (
                     <output {...props}>
                         <Tooltip
@@ -64,7 +83,7 @@ function HadithSourceForm() {
                                         e.key === "Enter" &&
                                         !isNaN(Number(inputValue))
                                     ) {
-                                        handleChange(Number(inputValue));
+                                        handleChangeEnd(Number(inputValue));
                                     }
                                 }}
                             />
