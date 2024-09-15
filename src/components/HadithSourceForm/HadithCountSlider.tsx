@@ -5,7 +5,7 @@ import {
 } from "../../stores/formStateStore/formStateStore";
 import { useState } from "react";
 import { processNewValue } from "../../lib/utils";
-import { Tooltip } from "@nextui-org/react";
+import HadithCountInput from "./HadithCountInput";
 
 function HadithCountSlider() {
     const isLoading = useFormStateStore((state) => state.isLoading);
@@ -45,37 +45,11 @@ function HadithCountSlider() {
             onChangeEnd={handleUpdateAllCountStates}
             renderValue={({ ...props }) => (
                 <output {...props}>
-                    <Tooltip
-                        className="rounded-md text-tiny text-default-500"
-                        content="Press Enter to confirm"
-                        placement="left"
-                    >
-                        <input
-                            className="w-12 rounded-small border-medium border-transparent bg-default-100 px-1 py-0.5 text-right text-small font-medium text-default-700 outline-none transition-colors hover:border-primary focus:border-primary"
-                            type="text"
-                            aria-label="Temperature value"
-                            value={inputValue}
-                            onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>,
-                            ) => {
-                                const v = e.target.value;
-
-                                setInputValue(v);
-                            }}
-                            onKeyDown={(
-                                e: React.KeyboardEvent<HTMLInputElement>,
-                            ) => {
-                                if (
-                                    e.key === "Enter" &&
-                                    !isNaN(Number(inputValue))
-                                ) {
-                                    handleUpdateAllCountStates(
-                                        Number(inputValue),
-                                    );
-                                }
-                            }}
-                        />
-                    </Tooltip>
+                    <HadithCountInput
+                        inputValue={inputValue}
+                        handleUpdateAllCountStates={handleUpdateAllCountStates}
+                        setInputValue={setInputValue}
+                    />
                 </output>
             )}
         />
