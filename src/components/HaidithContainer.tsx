@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/react/shallow";
-import { useFormStateStore } from "../stores/formStateStore/formStateStore";
+import { useFormStateStore } from "../stores/formStateStore";
 // import HadithCard from "./HadithCard/HadithCard";
 import HadithCardSkeleton from "./HadithCard/HadithCardSkeleton";
 

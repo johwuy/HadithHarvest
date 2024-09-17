@@ -1,6 +1,6 @@
-import { HadithEntry } from "./hadithType";
+import { CollectionEntry } from "./hadithType";
 
-const hadithInfo: HadithEntry[] = [
+const hadithInfo: CollectionEntry[] = [
     { key: "bukhari", label: "Sahih al Bukhari" },
     { key: "muslim", label: "Sahih Muslim" },
     { key: "abudawud", label: "Sunan Abu Dawud" },

@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { HadithKey } from "../../lib/hadithType";
+import { CollectionKey } from "../lib/hadithType";
 
-const INITIAL_SOURCES: HadithKey[] = [
+const INITIAL_SOURCES: CollectionKey[] = [
     "bukhari",
     "muslim",
     "abudawud",
@@ -14,10 +14,10 @@ export const STARTING_COUNT = 1;
 
 type FormState = {
     isLoading: boolean;
-    hadithSources: HadithKey[];
+    hadithSources: CollectionKey[];
     hadithCount: number;
-    setHadithSources: (newSources: HadithKey[]) => void;
-    removeHadithSource: (source: HadithKey) => void;
+    setHadithSources: (newSources: CollectionKey[]) => void;
+    removeHadithSource: (source: CollectionKey) => void;
     setHadithCount: (newCount: number) => void;
     toggleLoading: () => void;
     generateHadith: () => void;
@@ -28,9 +28,9 @@ export const useFormStateStore = create<FormState>((set, get) => ({
     hadithSources: INITIAL_SOURCES,
     hadithCount: STARTING_COUNT,
     toggleLoading: () => set((prev) => ({ isLoading: !prev.isLoading })),
-    setHadithSources: (newSources: HadithKey[]) =>
+    setHadithSources: (newSources: CollectionKey[]) =>
         set(() => ({ hadithSources: newSources })),
-    removeHadithSource: (toRemoveSource: HadithKey) =>
+    removeHadithSource: (toRemoveSource: CollectionKey) =>
         set((state) =>
             state.hadithSources.length > 1
                 ? {

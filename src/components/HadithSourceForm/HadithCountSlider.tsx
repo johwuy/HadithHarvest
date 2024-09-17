@@ -1,8 +1,5 @@
 import { Slider, SliderValue } from "@nextui-org/slider";
-import {
-    STARTING_COUNT,
-    useFormStateStore,
-} from "../../stores/formStateStore/formStateStore";
+import { STARTING_COUNT, useFormStateStore } from "../../stores/formStateStore";
 import { useState } from "react";
 import { processNewValue } from "../../lib/utils";
 import HadithCountInput from "./HadithCountInput";

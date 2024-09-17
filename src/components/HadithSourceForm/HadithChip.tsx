@@ -1,6 +1,6 @@
 import { Chip } from "@nextui-org/chip";
 import { HadithKey } from "../../lib/hadithType";
-import { useFormStateStore } from "../../stores/formStateStore/formStateStore";
+import { useFormStateStore } from "../../stores/formStateStore";
 import { ReactNode } from "react";
 
 type HadithChipProps = {

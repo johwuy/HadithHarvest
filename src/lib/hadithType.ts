@@ -1,4 +1,4 @@
-export type HadithKey =
+export type CollectionKey =
     | "bukhari"
     | "muslim"
     | "abudawud"
@@ -6,7 +6,15 @@ export type HadithKey =
     | "nasai"
     | "ibnmajah";
 
-export type HadithEntry = {
-    key: HadithKey;
+export type CollectionEntry = {
+    key: CollectionKey;
     label: string;
+};
+
+export type HadithData = {
+    narratedPhrase: string;
+    text: string;
+    collectionName: string;
+    hadithNumber: number;
+    bookName: string;
 };

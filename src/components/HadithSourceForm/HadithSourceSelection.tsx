@@ -1,7 +1,7 @@
 import { Select, SelectedItems, SelectItem } from "@nextui-org/select";
 import hadithInfo from "../../lib/hadithInfo";
 import { HadithEntry, HadithKey } from "../../lib/hadithType";
-import { useFormStateStore } from "../../stores/formStateStore/formStateStore";
+import { useFormStateStore } from "../../stores/formStateStore";
 import HadithChip from "./HadithChip";
 
 function HadithSourceSelection() {

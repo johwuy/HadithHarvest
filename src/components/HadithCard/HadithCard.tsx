@@ -3,13 +3,9 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import StarIcon from "../Icons/StarIcon";
 import { Tooltip } from "@nextui-org/tooltip";
 import InformationCircle from "../Icons/InformationCirciel";
+import { HadithData } from "../../lib/hadithType";
 
-type HadithCardProps = {
-    narratedPhrase: string;
-    text: string;
-    collectionName: string;
-    hadithNumber: number;
-    bookName: string;
+type HadithCardProps = HadithData & {
     favorited: boolean;
 };
 

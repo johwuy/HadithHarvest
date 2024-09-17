@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import { useFormStateStore } from "../../stores/formStateStore/formStateStore";
+import { useFormStateStore } from "../../stores/formStateStore";
 import HadithSourceSelection from "./HadithSourceSelection";
 import HadithCountSlider from "./HadithCountSlider";
 import { useShallow } from "zustand/react/shallow";
