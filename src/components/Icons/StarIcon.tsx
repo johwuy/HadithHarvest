@@ -7,7 +7,7 @@ function StarIcon({ filled }: StarIconProps) {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill={filled ? "yellow" : "white"}
-            fill-opacity={filled ? 0.5 : 0}
+            fillOpacity={filled ? 0.5 : 0}
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
