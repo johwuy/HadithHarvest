@@ -20,9 +20,10 @@ type FormState = {
     removeHadithSource: (source: HadithKey) => void;
     setHadithCount: (newCount: number) => void;
     toggleLoading: () => void;
+    generateHadith: () => void;
 };
 
-export const useFormStateStore = create<FormState>((set) => ({
+export const useFormStateStore = create<FormState>((set, get) => ({
     isLoading: false,
     hadithSources: INITIAL_SOURCES,
     hadithCount: STARTING_COUNT,
@@ -41,4 +42,10 @@ export const useFormStateStore = create<FormState>((set) => ({
         ),
     setHadithCount: (newCount: number) =>
         set(() => ({ hadithCount: newCount >= 1 ? Math.round(newCount) : 1 })),
+    generateHadith: async () => {
+        get().toggleLoading();
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(get().hadithSources, get().hadithCount);
+        get().toggleLoading();
+    },
 }));

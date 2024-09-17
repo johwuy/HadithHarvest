@@ -5,15 +5,12 @@ import HadithCountSlider from "./HadithCountSlider";
 import { useShallow } from "zustand/react/shallow";
 
 function HadithSourceForm() {
-    const { isLoading, toggleLoading, hadithSources, hadithCount } =
-        useFormStateStore(
-            useShallow((state) => ({
-                isLoading: state.isLoading,
-                toggleLoading: state.toggleLoading,
-                hadithSources: state.hadithSources,
-                hadithCount: state.hadithCount,
-            })),
-        );
+    const { isLoading, generateHadith } = useFormStateStore(
+        useShallow((state) => ({
+            isLoading: state.isLoading,
+            generateHadith: state.generateHadith,
+        })),
+    );
 
     return (
         <form className="flex w-full max-w-5xl flex-col space-y-8 px-6 py-4">
@@ -22,12 +19,7 @@ function HadithSourceForm() {
             <Button
                 className=""
                 color="primary"
-                onClick={async () => {
-                    toggleLoading();
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
-                    console.log(hadithSources, hadithCount);
-                    toggleLoading();
-                }}
+                onClick={generateHadith}
                 isLoading={isLoading}
             >
                 Generate
