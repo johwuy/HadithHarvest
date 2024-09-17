@@ -1,8 +1,13 @@
-function StarIcon() {
+type StarIconProps = {
+    filled: boolean;
+};
+
+function StarIcon({ filled }: StarIconProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="yellow"
+            fill={filled ? "yellow" : "white"}
+            fill-opacity={filled ? 0.5 : 0}
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"

@@ -18,7 +18,7 @@ function NavigationBar() {
             <NavbarContent justify="end">
                 <NavbarItem>
                     <Button isIconOnly variant="shadow">
-                        <StarIcon />
+                        <StarIcon filled />
                     </Button>
                 </NavbarItem>
             </NavbarContent>
