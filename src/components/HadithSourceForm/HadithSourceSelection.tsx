@@ -1,6 +1,6 @@
 import { Select, SelectedItems, SelectItem } from "@nextui-org/select";
 import hadithInfo from "../../lib/hadithInfo";
-import { HadithEntry, HadithKey } from "../../lib/hadithType";
+import { CollectionKey, CollectionEntry } from "../../lib/hadithType";
 import { useFormStateStore } from "../../stores/formStateStore";
 import HadithChip from "./HadithChip";
 
@@ -11,7 +11,7 @@ function HadithSourceSelection() {
         // Emptry string will split into [""] with a length 1
         const newHadtithSouces =
             event.target.value != ""
-                ? (event.target.value.split(",") as HadithKey[])
+                ? (event.target.value.split(",") as CollectionKey[])
                 : [];
         if (newHadtithSouces.length > 0) {
             setHadithSources(newHadtithSouces);
@@ -19,12 +19,12 @@ function HadithSourceSelection() {
     }
 
     function handleRenderChip(
-        selectedHadiths: SelectedItems<HadithEntry>,
+        selectedHadiths: SelectedItems<CollectionEntry>,
     ): JSX.Element {
         return (
             <div className="flex flex-wrap gap-2">
                 {selectedHadiths.map(({ key, textValue }) => (
-                    <HadithChip key={key} id={key?.toString() as HadithKey}>
+                    <HadithChip key={key} id={key?.toString() as CollectionKey}>
                         {textValue}
                     </HadithChip>
                 ))}
