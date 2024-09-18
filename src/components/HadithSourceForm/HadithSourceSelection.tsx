@@ -2,7 +2,7 @@ import { Select, SelectedItems, SelectItem } from "@nextui-org/select";
 import hadithInfo from "../../lib/hadithInfo";
 import { CollectionKey, CollectionEntry } from "../../lib/hadithType";
 import { useFormStateStore } from "../../stores/formStateStore";
-import HadithChip from "./HadithChip";
+import CollectionChip from "./CollectionChip";
 
 function HadithSourceSelection() {
     const { isLoading, hadithSources, setHadithSources } = useFormStateStore();
@@ -19,14 +19,17 @@ function HadithSourceSelection() {
     }
 
     function handleRenderChip(
-        selectedHadiths: SelectedItems<CollectionEntry>,
+        selectedCollections: SelectedItems<CollectionEntry>,
     ): JSX.Element {
         return (
             <div className="flex flex-wrap gap-2">
-                {selectedHadiths.map(({ key, textValue }) => (
-                    <HadithChip key={key} id={key?.toString() as CollectionKey}>
+                {selectedCollections.map(({ key, textValue }) => (
+                    <CollectionChip
+                        key={key}
+                        id={key?.toString() as CollectionKey}
+                    >
                         {textValue}
-                    </HadithChip>
+                    </CollectionChip>
                 ))}
             </div>
         );

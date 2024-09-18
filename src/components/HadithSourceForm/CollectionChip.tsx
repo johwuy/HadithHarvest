@@ -1,17 +1,17 @@
 import { Chip } from "@nextui-org/chip";
-import { HadithKey } from "../../lib/hadithType";
+import { CollectionKey } from "../../lib/hadithType";
 import { useFormStateStore } from "../../stores/formStateStore";
 import { ReactNode } from "react";
 
-type HadithChipProps = {
-    id: HadithKey;
+type CollectionChipProps = {
+    id: CollectionKey;
     children: ReactNode;
 };
 
-function HadithChip({ id, children }: HadithChipProps) {
+function CollectionChip({ id, children }: CollectionChipProps) {
     const { removeHadithSource } = useFormStateStore();
 
     return <Chip onClose={() => removeHadithSource(id)}>{children}</Chip>;
 }
 
-export default HadithChip;
+export default CollectionChip;
