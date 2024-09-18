@@ -19,6 +19,8 @@ export type CollectionEntry = {
     label: CollectionName;
 };
 
+export type Token = `${CollectionKey}-${number}`;
+
 export type HadithData = {
     narratedPhrase: string;
     text: string;

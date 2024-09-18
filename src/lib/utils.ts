@@ -1,6 +1,6 @@
 import { SliderValue } from "@nextui-org/slider";
 import hadithInfo from "./hadithInfo";
-import { CollectionKey, CollectionName } from "./hadithType";
+import { CollectionKey, CollectionName, Token } from "./hadithType";
 
 export function processNewValue(newValue: SliderValue): number | null {
     // SliderValue supports Sliders with upper and lower range
@@ -18,4 +18,11 @@ export function lableToKey(label: CollectionName): CollectionKey | undefined {
         return entry.key;
     }
     return undefined;
+}
+
+export function getToken(
+    collectionKey: CollectionKey,
+    hadithNumber: number,
+): Token {
+    return `${collectionKey}-${hadithNumber}`;
 }
