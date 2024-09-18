@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import StarIcon from "../Icons/StarIcon";
 import { Tooltip } from "@nextui-org/tooltip";
-import InformationCircle from "../Icons/InformationCirciel";
+import InformationCircle from "../Icons/InformationCircie";
 import { HadithData } from "../../lib/hadithType";
 import { lableToKey } from "../../lib/utils";
 
