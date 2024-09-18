@@ -1,4 +1,6 @@
 import { SliderValue } from "@nextui-org/slider";
+import hadithInfo from "./hadithInfo";
+import { CollectionKey } from "./hadithType";
 
 export function processNewValue(newValue: SliderValue): number | null {
     // SliderValue supports Sliders with upper and lower range
@@ -8,4 +10,12 @@ export function processNewValue(newValue: SliderValue): number | null {
 
     const value = Math.max(1, Math.round(num));
     return value;
+}
+
+export function lableToKey(label: string): CollectionKey | undefined {
+    const entry = hadithInfo.find((entry) => entry.label == label);
+    if (entry) {
+        return entry.key;
+    }
+    return undefined;
 }

@@ -4,10 +4,9 @@ import StarIcon from "../Icons/StarIcon";
 import { Tooltip } from "@nextui-org/tooltip";
 import InformationCircle from "../Icons/InformationCirciel";
 import { HadithData } from "../../lib/hadithType";
+import { lableToKey } from "../../lib/utils";
 
-type HadithCardProps = HadithData & {
-    favorited: boolean;
-};
+type HadithCardProps = HadithData;
 
 function HadithCard({
     narratedPhrase,
@@ -15,14 +14,19 @@ function HadithCard({
     collectionName,
     hadithNumber,
     bookName,
-    favorited,
 }: HadithCardProps) {
     return (
         <Card className="p-8">
             <CardHeader className="flex justify-between p-2">
                 <p className="italic">{narratedPhrase}: </p>
-                <Button isIconOnly variant="light">
-                    <StarIcon filled={favorited} />
+                <Button
+                    isIconOnly
+                    variant="light"
+                    onClick={() =>
+                        console.log(lableToKey(collectionName), hadithNumber)
+                    }
+                >
+                    <StarIcon filled />
                 </Button>
             </CardHeader>
             <CardBody className="p-2">
