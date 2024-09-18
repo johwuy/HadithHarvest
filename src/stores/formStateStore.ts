@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { CollectionKey } from "../lib/hadithType";
+import { CollectionKey, HadithData } from "../lib/hadithType";
 
 const INITIAL_SOURCES: CollectionKey[] = [
     "bukhari",
@@ -21,12 +21,14 @@ type FormState = {
     setHadithCount: (newCount: number) => void;
     toggleLoading: () => void;
     generateHadith: () => void;
+    generatedHadiths: HadithData[];
 };
 
 export const useFormStateStore = create<FormState>((set, get) => ({
     isLoading: false,
     hadithSources: INITIAL_SOURCES,
     hadithCount: STARTING_COUNT,
+    generatedHadiths: [],
     toggleLoading: () => set((prev) => ({ isLoading: !prev.isLoading })),
     setHadithSources: (newSources: CollectionKey[]) =>
         set(() => ({ hadithSources: newSources })),
