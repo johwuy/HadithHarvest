@@ -3,6 +3,7 @@ import { HadithData, HadithID } from "../lib/hadithType";
 
 type FavoritedStore = {
     favorited: HadithData[];
+    isFavorited: (hadithID: HadithID) => boolean;
     addHadith: (hadithData: HadithData) => void;
     removeHadith: (removeHadithID: HadithID) => void;
     toggleFavorite: (hadithData: HadithData) => void;
@@ -10,6 +11,8 @@ type FavoritedStore = {
 
 export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
     favorited: [],
+    isFavorited: (hadithID: HadithID) =>
+        get().favorited.some((item) => item.hadithID == hadithID),
     addHadith: async (hadithData) => {
         console.log(`Add to database: ${hadithData.hadithID}`);
         set((state) => ({ favorited: [...state.favorited, hadithData] }));
@@ -23,7 +26,7 @@ export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
         }));
     },
     toggleFavorite: async (hadithData) => {
-        if (get().favorited.includes(hadithData)) {
+        if (get().isFavorited(hadithData.hadithID)) {
             get().removeHadith(hadithData.hadithID);
         } else {
             get().addHadith(hadithData);
