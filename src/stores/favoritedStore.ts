@@ -1,12 +1,12 @@
 //store
 // set of favoite object, {CollectionKey}-{Hadith Number}
-// use set because look up is faster and there can be no duplicate faovites
+// use set because look up is faster and there can be no duplicate faovites\
+// // can't use set as it doesn't support reeactivity
 // toggleFavorite given collection name and hadith number
 // method for fetch favorites to database
 
 import { create } from "zustand";
-import { CollectionKey, Token } from "../lib/hadithType";
-import { getToken } from "../lib/utils";
+import { Token } from "../lib/hadithType";
 
 // toggle favorite in card
 // Favorited or not will be decidied within the componenet as the favorite can be toggled on and off.
@@ -17,16 +17,12 @@ import { getToken } from "../lib/utils";
 
 type FavoritedStore = {
     favorited: Token[];
-    toggleFavorite: (
-        collectionKey: CollectionKey,
-        hadithNumber: number,
-    ) => void;
+    toggleFavorite: (token: Token) => void;
 };
 
 export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
     favorited: [],
-    toggleFavorite: (collectionKey, hadithNumber) => {
-        const token = getToken(collectionKey, hadithNumber);
+    toggleFavorite: (token) => {
         if (get().favorited.includes(token)) {
             set((state) => ({
                 favorited: state.favorited.filter(

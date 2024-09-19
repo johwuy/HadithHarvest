@@ -7,8 +7,11 @@ import {
 } from "@nextui-org/navbar";
 import StarIcon from "./Icons/StarIcon";
 import WheatLogo from "./Icons/WheatLogo";
+import { useFavoritedStore } from "../stores/favoritedStore";
 
 function NavigationBar() {
+    const favoritedHadith = useFavoritedStore((state) => state.favorited);
+
     return (
         <Navbar shouldHideOnScroll isBordered>
             <NavbarBrand>
@@ -17,7 +20,11 @@ function NavigationBar() {
             </NavbarBrand>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button isIconOnly variant="shadow">
+                    <Button
+                        isIconOnly
+                        variant="shadow"
+                        onClick={() => console.log(favoritedHadith)}
+                    >
                         <StarIcon filled />
                     </Button>
                 </NavbarItem>

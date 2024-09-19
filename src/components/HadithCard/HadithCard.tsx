@@ -1,10 +1,12 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
-import StarIcon from "../Icons/StarIcon";
 import { Tooltip } from "@nextui-org/tooltip";
+import { useShallow } from "zustand/react/shallow";
+import { HadithData, Token } from "../../lib/hadithType";
+import { getToken, labelToKey } from "../../lib/utils";
+import { useFavoritedStore } from "../../stores/favoritedStore";
 import InformationCircle from "../Icons/InformationCircie";
-import { HadithData } from "../../lib/hadithType";
-import { lableToKey } from "../../lib/utils";
+import StarIcon from "../Icons/StarIcon";
 
 type HadithCardProps = HadithData;
 
@@ -15,6 +17,16 @@ function HadithCard({
     hadithNumber,
     bookName,
 }: HadithCardProps) {
+    const { favorited, toggleFavorite } = useFavoritedStore(
+        useShallow((state) => ({
+            toggleFavorite: state.toggleFavorite,
+            favorited: state.favorited,
+        })),
+    );
+
+    const token: Token = getToken(labelToKey(collectionName), hadithNumber);
+    const isFavorited = favorited.includes(token);
+
     return (
         <Card className="p-8">
             <CardHeader className="flex justify-between p-2">
@@ -22,11 +34,9 @@ function HadithCard({
                 <Button
                     isIconOnly
                     variant="light"
-                    onClick={() =>
-                        console.log(lableToKey(collectionName), hadithNumber)
-                    }
+                    onClick={() => toggleFavorite(token)}
                 >
-                    <StarIcon filled />
+                    <StarIcon filled={isFavorited} />
                 </Button>
             </CardHeader>
             <CardBody className="p-2">

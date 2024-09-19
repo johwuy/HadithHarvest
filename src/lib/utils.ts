@@ -12,12 +12,14 @@ export function processNewValue(newValue: SliderValue): number | null {
     return value;
 }
 
-export function lableToKey(label: CollectionName): CollectionKey | undefined {
-    const entry = hadithInfo.find((entry) => entry.label == label);
-    if (entry) {
-        return entry.key;
+export function labelToKey(label: CollectionName): CollectionKey {
+    const entry = hadithInfo.find((entry) => entry.label === label);
+
+    if (!entry) {
+        throw new Error(`Label "${label}" not found in hadith collections.`);
     }
-    return undefined;
+
+    return entry.key;
 }
 
 export function getToken(
