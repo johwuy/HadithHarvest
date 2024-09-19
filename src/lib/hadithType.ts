@@ -19,9 +19,10 @@ export type CollectionEntry = {
     label: CollectionName;
 };
 
-export type Token = `${CollectionKey}-${number}`;
+export type HadithID = `${CollectionKey}-${number}`;
 
 export type HadithData = {
+    hadithID: HadithID;
     narratedPhrase: string;
     text: string;
     collectionName: CollectionName;

@@ -1,38 +1,32 @@
-//store
-// set of favoite object, {CollectionKey}-{Hadith Number}
-// use set because look up is faster and there can be no duplicate faovites\
-// // can't use set as it doesn't support reeactivity
-// toggleFavorite given collection name and hadith number
-// method for fetch favorites to database
-
 import { create } from "zustand";
-import { Token } from "../lib/hadithType";
-
-// toggle favorite in card
-// Favorited or not will be decidied within the componenet as the favorite can be toggled on and off.
-// decided outside won't trigger re-render.
-// I won't use a state because the favorited can be changed outside the component.
-// Single source of truth.
-//
+import { HadithData, HadithID } from "../lib/hadithType";
 
 type FavoritedStore = {
-    favorited: Token[];
-    toggleFavorite: (token: Token) => void;
+    favorited: HadithData[];
+    addHadith: (hadithData: HadithData) => void;
+    removeHadith: (removeHadithID: HadithID) => void;
+    toggleFavorite: (hadithData: HadithData) => void;
 };
 
 export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
     favorited: [],
-    toggleFavorite: (token) => {
-        if (get().favorited.includes(token)) {
-            set((state) => ({
-                favorited: state.favorited.filter(
-                    (favorited) => favorited != token,
-                ),
-            }));
+    addHadith: async (hadithData) => {
+        console.log(`Add to database: ${hadithData.hadithID}`);
+        set((state) => ({ favorited: [...state.favorited, hadithData] }));
+    },
+    removeHadith: async (removeHadithID) => {
+        console.log(`Remove to database: ${removeHadithID}`);
+        set((state) => ({
+            favorited: state.favorited.filter(
+                (hadith) => hadith.hadithID != removeHadithID,
+            ),
+        }));
+    },
+    toggleFavorite: async (hadithData) => {
+        if (get().favorited.includes(hadithData)) {
+            get().removeHadith(hadithData.hadithID);
         } else {
-            set((state) => ({
-                favorited: [...state.favorited, token],
-            }));
+            get().addHadith(hadithData);
         }
     },
 }));
