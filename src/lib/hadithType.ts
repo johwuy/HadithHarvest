@@ -1,18 +1,7 @@
-export type CollectionKey =
-    | "bukhari"
-    | "muslim"
-    | "abudawud"
-    | "tirmidhi"
-    | "nasai"
-    | "ibnmajah";
+import { HadithInfo } from "./hadithInfo";
 
-export type CollectionName =
-    | "Sahih al Bukhari"
-    | "Sahih Muslim"
-    | "Sunan Abu Dawud"
-    | "Jami At Tirmidhi"
-    | "Sunan an Nasai"
-    | "Sunan Ibn Majah";
+export type CollectionKey = HadithInfo["key"];
+export type CollectionName = HadithInfo["label"];
 
 export type CollectionEntry = {
     key: CollectionKey;
