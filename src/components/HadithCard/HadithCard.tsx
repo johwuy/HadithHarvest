@@ -2,22 +2,15 @@ import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Tooltip } from "@nextui-org/tooltip";
 import { useShallow } from "zustand/react/shallow";
+import { COLLECTION_KEY_TO_NAME } from "../../lib/consts";
 import { HadithData } from "../../lib/hadithType";
 import { useFavoritedStore } from "../../stores/favoritedStore";
 import InformationCircle from "../Icons/InformationCircie";
 import StarIcon from "../Icons/StarIcon";
 
-type HadithCardProps = HadithData;
-
-function HadithCard(props: HadithCardProps) {
-    const {
-        narratedPhrase,
-        text,
-        collectionName,
-        hadithNumber,
-        bookName,
-        collectionKey,
-    } = props;
+function HadithCard(props: HadithData) {
+    const { narratedPhrase, text, hadithNumber, bookName, collectionKey } =
+        props;
 
     const { toggleFavorite, favorited } = useFavoritedStore(
         useShallow((state) => ({
@@ -51,7 +44,7 @@ function HadithCard(props: HadithCardProps) {
             </CardBody>
             <CardFooter className="flex justify-end space-x-2 p-2">
                 <p>
-                    ({collectionName}, {hadithNumber})
+                    ({COLLECTION_KEY_TO_NAME[collectionKey]}, {hadithNumber})
                 </p>
                 <Tooltip
                     content={

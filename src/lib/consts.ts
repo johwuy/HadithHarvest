@@ -1,3 +1,5 @@
+import { CollectionKey, CollectionName } from "./hadithType";
+
 export const HADITH_INFO = [
     { key: "bukhari", label: "Sahih al Bukhari" },
     { key: "muslim", label: "Sahih Muslim" },
@@ -8,3 +10,12 @@ export const HADITH_INFO = [
 ] as const;
 
 export type HadithInfo = (typeof HADITH_INFO)[number];
+
+export const COLLECTION_KEY_TO_NAME: Record<CollectionKey, CollectionName> =
+    HADITH_INFO.reduce(
+        (acc, { key, label }) => {
+            acc[key] = label;
+            return acc;
+        },
+        {} as Record<CollectionKey, CollectionName>,
+    );

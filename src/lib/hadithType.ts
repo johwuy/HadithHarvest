@@ -16,7 +16,6 @@ export type HadithID = {
 export type HadithData = {
     narratedPhrase: string;
     text: string;
-    collectionName: CollectionName;
     collectionKey: CollectionKey;
     hadithNumber: number;
     bookName: string;

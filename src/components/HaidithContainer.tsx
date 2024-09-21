@@ -16,7 +16,6 @@ function HadithContainer() {
             <HadithCard
                 collectionKey="bukhari"
                 bookName="Revelation"
-                collectionName="Sahih al Bukhari"
                 hadithNumber={1}
                 narratedPhrase="Narrated 'Umar bin Al-Khattab"
                 text={`I heard Allah's Messenger (ﷺ) saying, "The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for`}
