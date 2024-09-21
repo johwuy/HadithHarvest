@@ -1,4 +1,4 @@
-const hadithInfo = [
+export const HADITH_INFO = [
     { key: "bukhari", label: "Sahih al Bukhari" },
     { key: "muslim", label: "Sahih Muslim" },
     { key: "abudawud", label: "Sunan Abu Dawud" },
@@ -7,6 +7,4 @@ const hadithInfo = [
     { key: "ibnmajah", label: "Sunan Ibn Majah" },
 ] as const;
 
-export type HadithInfo = (typeof hadithInfo)[number];
-
-export default hadithInfo;
+export type HadithInfo = (typeof HADITH_INFO)[number];

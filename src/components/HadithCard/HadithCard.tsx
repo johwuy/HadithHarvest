@@ -16,18 +16,22 @@ function HadithCard(props: HadithCardProps) {
         collectionName,
         hadithNumber,
         bookName,
-        hadithID,
+        collectionKey,
     } = props;
 
-    const { favorited, toggleFavorite } = useFavoritedStore(
+    const { toggleFavorite, favorited } = useFavoritedStore(
         useShallow((state) => ({
             toggleFavorite: state.toggleFavorite,
             favorited: state.favorited,
         })),
     );
 
-    const isFavorited = favorited.some(
-        (item: HadithData) => item.hadithID === hadithID,
+    // Can't use the isFavorited  method of store, as if favorite updates,
+    // the star doesn't udpate.
+    const isFilled = favorited.some(
+        (item) =>
+            item.collectionKey === collectionKey &&
+            item.hadithNumber === hadithNumber,
     );
 
     return (
@@ -39,7 +43,7 @@ function HadithCard(props: HadithCardProps) {
                     variant="light"
                     onClick={() => toggleFavorite(props)}
                 >
-                    <StarIcon filled={isFavorited} />
+                    <StarIcon filled={isFilled} />
                 </Button>
             </CardHeader>
             <CardBody className="p-2">

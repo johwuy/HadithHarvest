@@ -1,5 +1,5 @@
 import { Select, SelectedItems, SelectItem } from "@nextui-org/select";
-import hadithInfo from "../../lib/hadithInfo";
+import { HADITH_INFO } from "../../lib/consts";
 import { CollectionKey, CollectionEntry } from "../../lib/hadithType";
 import { useFormStateStore } from "../../stores/formStateStore";
 import CollectionChip from "./CollectionChip";
@@ -38,7 +38,7 @@ function HadithSourceSelection() {
     return (
         <Select
             isDisabled={isLoading}
-            items={hadithInfo}
+            items={HADITH_INFO}
             label="Hadith Source"
             selectionMode="multiple"
             size="lg"
@@ -48,7 +48,7 @@ function HadithSourceSelection() {
             onChange={handleHadithChange}
             renderValue={handleRenderChip}
         >
-            {hadithInfo.map((hadith) => (
+            {HADITH_INFO.map((hadith) => (
                 <SelectItem key={hadith.key}>{hadith.label}</SelectItem>
             ))}
         </Select>

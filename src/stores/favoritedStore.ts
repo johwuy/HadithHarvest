@@ -1,33 +1,57 @@
 import { create } from "zustand";
-import { HadithData, HadithID } from "../lib/hadithType";
+import { CollectionKey, HadithData } from "../lib/hadithType";
 
 type FavoritedStore = {
     favorited: HadithData[];
-    isFavorited: (hadithID: HadithID) => boolean;
+    isFavorited: (collection: CollectionKey, hadithNumber: number) => boolean;
     addHadith: (hadithData: HadithData) => void;
-    removeHadith: (removeHadithID: HadithID) => void;
+    removeHadith: (collection: CollectionKey, hadithNumber: number) => void;
     toggleFavorite: (hadithData: HadithData) => void;
 };
 
 export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
     favorited: [],
-    isFavorited: (hadithID: HadithID) =>
-        get().favorited.some((item) => item.hadithID == hadithID),
-    addHadith: async (hadithData) => {
-        console.log(`Add to database: ${hadithData.hadithID}`);
-        set((state) => ({ favorited: [...state.favorited, hadithData] }));
+    isFavorited: (collection, hadithNumber) =>
+        get().favorited.some(
+            (item) =>
+                item.collectionKey === collection &&
+                item.hadithNumber === hadithNumber,
+        ),
+    addHadith: (hadithData) => {
+        if (
+            !get().isFavorited(
+                hadithData.collectionKey,
+                hadithData.hadithNumber,
+            )
+        ) {
+            console.log(
+                `Add to database: ${hadithData.collectionKey}-${hadithData.hadithNumber}`,
+            );
+            set((state) => ({
+                favorited: [...state.favorited, hadithData],
+            }));
+        }
     },
-    removeHadith: async (removeHadithID) => {
-        console.log(`Remove to database: ${removeHadithID}`);
-        set((state) => ({
-            favorited: state.favorited.filter(
-                (hadith) => hadith.hadithID != removeHadithID,
-            ),
-        }));
+    removeHadith: (collection, hadithNumber) => {
+        if (get().isFavorited(collection, hadithNumber)) {
+            console.log(`Remove from database: ${collection}-${hadithNumber}`);
+            set((state) => ({
+                favorited: state.favorited.filter(
+                    (hadith) =>
+                        hadith.collectionKey !== collection ||
+                        hadith.hadithNumber !== hadithNumber,
+                ),
+            }));
+        }
     },
-    toggleFavorite: async (hadithData) => {
-        if (get().isFavorited(hadithData.hadithID)) {
-            get().removeHadith(hadithData.hadithID);
+    toggleFavorite: (hadithData) => {
+        if (
+            get().isFavorited(hadithData.collectionKey, hadithData.hadithNumber)
+        ) {
+            get().removeHadith(
+                hadithData.collectionKey,
+                hadithData.hadithNumber,
+            );
         } else {
             get().addHadith(hadithData);
         }

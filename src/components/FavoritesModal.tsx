@@ -22,7 +22,7 @@ function FavoritesModal({ isOpen, onOpenChange }: FavoritesModalProps) {
         <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            size="2xl"
+            size="3xl"
             scrollBehavior="outside"
             backdrop="blur"
         >
@@ -34,8 +34,8 @@ function FavoritesModal({ isOpen, onOpenChange }: FavoritesModalProps) {
                         <ModalBody>
                             {favorited.map((hadithData) => (
                                 <HadithCard
-                                    key={hadithData.hadithID}
-                                    hadithID={hadithData.hadithID}
+                                    key={`${hadithData.collectionKey}-${hadithData.collectionName}`}
+                                    collectionKey={hadithData.collectionKey}
                                     bookName={hadithData.bookName}
                                     collectionName={hadithData.collectionName}
                                     hadithNumber={hadithData.hadithNumber}
