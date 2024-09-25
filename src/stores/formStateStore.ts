@@ -47,7 +47,11 @@ export const useFormStateStore = create<FormState>((set, get) => ({
     generateHadith: async () => {
         get().toggleLoading();
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log(get().hadithSources, get().hadithCount);
+        const generatePost = {
+            hadithSources: get().hadithSources,
+            hadithCount: get().hadithCount,
+        };
+        console.log(JSON.stringify(generatePost));
         get().toggleLoading();
     },
 }));

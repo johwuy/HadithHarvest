@@ -24,9 +24,12 @@ export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
                 hadithData.hadithNumber,
             )
         ) {
-            console.log(
-                `Add to database: ${hadithData.collectionKey}-${hadithData.hadithNumber}`,
-            );
+            // Make post request to database.
+            const hadithPost = {
+                collectionKey: hadithData.collectionKey,
+                hadithNumber: hadithData.hadithNumber,
+            };
+            console.log(`Add to database: ${JSON.stringify(hadithPost)}`);
             set((state) => ({
                 favorited: [...state.favorited, hadithData],
             }));
@@ -34,7 +37,11 @@ export const useFavoritedStore = create<FavoritedStore>((set, get) => ({
     },
     removeHadith: (collection, hadithNumber) => {
         if (get().isFavorited(collection, hadithNumber)) {
-            console.log(`Remove from database: ${collection}-${hadithNumber}`);
+            const hadithPost = {
+                collectionKey: collection,
+                hadithNumber: hadithNumber,
+            };
+            console.log(`Add to database: ${JSON.stringify(hadithPost)}`);
             set((state) => ({
                 favorited: state.favorited.filter(
                     (hadith) =>
