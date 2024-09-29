@@ -4,22 +4,26 @@ import HadithCard from "./HadithCard/HadithCard";
 import HadithCardSkeleton from "./HadithCard/HadithCardSkeleton";
 
 function HadithContainer() {
-    const { isLoading, hadithCount } = useFormStateStore(
+    const { isLoading, hadithCount, generatedHadiths } = useFormStateStore(
         useShallow((state) => ({
             isLoading: state.isLoading,
             hadithCount: state.hadithCount,
+            generatedHadiths: state.generatedHadiths,
         })),
     );
 
     return (
         <div className="flex w-full max-w-5xl flex-col space-y-8 px-6 py-4">
-            <HadithCard
-                collectionKey="bukhari"
-                bookName="Revelation"
-                hadithNumber={1}
-                narratedPhrase="Narrated 'Umar bin Al-Khattab"
-                text={`I heard Allah's Messenger (ﷺ) saying, "The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for`}
-            />
+            {generatedHadiths.map((hadith) => (
+                <HadithCard
+                    key={`${hadith.collectionKey}-${hadith.hadithNumber}`}
+                    bookName={hadith.bookName}
+                    collectionKey={hadith.collectionKey}
+                    hadithNumber={hadith.hadithNumber}
+                    narratedPhrase={hadith.narratedPhrase}
+                    text={hadith.text}
+                />
+            ))}
             {isLoading &&
                 Array.from({ length: hadithCount }, (_, index) => (
                     <HadithCardSkeleton key={index} />

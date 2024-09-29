@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { CollectionKey, HadithData } from "../lib/hadithType";
+import { generateHadiths } from "../lib/utils";
 
 const INITIAL_SOURCES: CollectionKey[] = [
     "bukhari",
@@ -46,12 +47,14 @@ export const useFormStateStore = create<FormState>((set, get) => ({
         set(() => ({ hadithCount: newCount >= 1 ? Math.round(newCount) : 1 })),
     generateHadith: async () => {
         get().toggleLoading();
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        const generatePost = {
-            hadithSources: get().hadithSources,
-            hadithCount: get().hadithCount,
-        };
-        console.log(JSON.stringify(generatePost));
+
+        // Clear the gnerated hadiths
+        set(() => ({ generatedHadiths: [] }));
+        const hadiths = await generateHadiths(
+            get().hadithSources,
+            get().hadithCount,
+        );
+        set(() => ({ generatedHadiths: hadiths }));
         get().toggleLoading();
     },
 }));
